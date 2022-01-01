@@ -1,0 +1,329 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+body{
+	margin: 6.25rem;
+	font-family: "Microsoft YaHei UI";
+}
+
+div{
+	margin: 0 auto;
+	position: relative;
+}
+a{
+	color: white;
+	text-decoration: none;
+}
+html{
+	background-color: #274655;
+}
+a:hover{
+	color: red;
+}
+.header{
+	float: left;
+	width: 100%;
+}
+.temp{
+	float: right;
+	padding-right: 1.875rem;
+	padding-top: 3.125rem;
+}
+
+
+.bg{
+	z-index: -1;
+	background-color: #1a2f39;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	filter: blur(0.125rem);
+}
+.header_ta{
+	color: white;
+	font-size: 2.5rem;
+	height: 100%;
+	float: left;
+	margin: 0.625rem 0 0 1.875rem ;
+}
+
+.content{
+	margin-top: 3.125rem;
+	float: left;
+	clear: both;
+	width: 100%;
+	padding-top: 1rem;
+    padding-bottom: 2rem;
+}
+.content-wrapper{
+	z-index: -1;
+	background-color: #1a2f39;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	filter: blur(0.125rem);
+}
+.content-main{
+	float: left;
+	width: 20%;
+	height: 30rem;
+	border: 0.0625rem solid tranparent;
+	margin: 0 0 1.25rem 4rem;
+	color: white;
+}
+
+.nav{
+	float: left;
+	position: absolute;
+	left: 50%;
+	top: 100%;
+	transform: translateX(-50%) translateY(-100%);
+	
+}
+
+.nav ul{
+	float: left;
+	clear: left;
+}
+li{
+	list-style: none;
+	float: left;
+	margin-right: 10px;
+}
+li a{
+	cursor: pointer;
+}
+li span{
+	color: white;
+}
+
+label.userinfo{
+	color: white;
+	font-size: 1rem;
+}
+.temp span.userinfo{
+	color: red;
+	font-size: 1.2rem;
+}
+.askforlogin{
+	color: red;
+	float: left;
+	left: 50%;
+	transform: translateX(-50%) ;
+	height: 28rem;
+	font-size: 2rem;
+}
+
+.list-wrapper{
+	float: left;
+	height: 26rem;
+	left: 50%;
+	transform: translateX(-50%) ;
+}
+
+.content-list{
+	margin-top: 4.25rem;
+	border-collapse: collapse;
+}
+
+th,td{
+}
+.loginForm{
+	background: #1a2f39;
+	width: 400px;
+	margin: 0 auto;
+	margin-top: 5px;
+	margin-bottom: 0.3125rem;
+	height: 26rem;
+	clear: both;
+	color: white;
+	font-family: "Microsoft YaHei UI";
+}
+
+.form-group span{
+	font-family: inherit;
+	color: #FF0000;
+}
+
+.form-horizontal{
+	display: table;
+	margin: 0 auto;
+}
+
+.control-label{
+	display: inline-block;	
+	text-align: right;
+	margin-top: 25px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.col-sm-10{
+	width: 280px;
+	height: 35px;
+	margin-top: 5px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.form-group{
+	display: table;
+	margin-left: -15px;
+	margin-right: -15px;
+	margin: 0 auto;
+}
+
+.form-control{
+	display: block;
+	width: 100%;
+	border: 1px solid black;
+	border-radius: 4px;
+	height: 26px;
+	padding: 6px 12px;
+	outline: none;
+	border: 1px solid transparent;
+}
+
+.wrapper{
+	width: 430px;
+	margin: 0 auto;
+	padding-right: 15px;
+	padding-left: 15px;
+}
+
+.btn,
+.btn:focus{
+	width: 60px;
+	height: 35px;
+	font-family: "microsoft yahei";
+	border: 1px solid transparent;
+	border-radius: 5px;
+	background: white;
+	white-space: nowrap;
+	cursor: pointer;
+	outline: none;
+}
+
+.btn:hover
+{
+	outline: none;
+	background-color: #DDDDDD;
+}
+
+.col-sm-offset-2{
+	margin-top: 35px;
+}
+.product-wrapper{
+	margin: 0 auto;
+}
+.product-icon{
+	display: block;
+}
+.product-name{
+	display: block;
+}
+.product-info{
+	display: block;
+}
+.content-main-beta{
+	float: left;
+	width: 75%;
+	border: 0.0625rem solid transparent;
+	color: white;
+	
+	left: 50%;
+	transform: translateX(-50%) ;
+}
+.productForm{
+	background: #1a2f39;
+	width: 400px;
+	margin: 0 auto;
+	margin-top: 5px;
+	margin-bottom: 0.3125rem;
+	clear: both;
+	color: white;
+	font-family: "Microsoft YaHei UI";
+}
+
+.productForm select{
+	border-radius: 4px;
+    height: 26px;
+    width: 75%;
+    padding: 1px 12px;
+    outline: none;
+    border: 1px solid transparent;
+    margin: 0 auto;
+}
+
+.product-img{
+	float:left;
+}
+.list{
+	background-color: #274655;
+	text-align: center;
+	color: white;
+	width: 60%;
+	border-radius: 10px;
+}
+.list table{
+	margin: 0 auto;
+}
+.nav span{
+	color: white;
+}
+.typech,.typech:focus{
+	background-color: blue;
+}
+.typede,.typede:focus{
+	background-color: red;
+}
+.typech,.typede,.typede:focus,.typech:focus{
+	color: white;
+}
+.typech:hover,.typede:hover{
+	color: aqua;
+	background-color: #1A2F39;
+}
+.changeform,.itemlist{
+	display: none;
+	position: absolute;
+	left: 50%;
+	top:50%;
+	z-index: 999;
+	transform: translateX(-75%) translateY(-50%);
+	width: 400px;
+	height: 400px;
+	background-color: #1A2F39;
+	color: white;
+	overflow: scroll;
+}
+.floating-form{
+	display: block;
+	width: 60%;
+	border-radius: 4px;
+	height: 26px;
+	padding: 6px 12px;
+	outline: none;
+	border: 1px solid transparent;
+	background-color: #274655;
+	color: white;	
+}
+.changeform span{
+	color: red;
+}
+
+.itemlist span{
+	display: block;
+	color: white;
+	border: 1px solid aqua;
+	border-radius: 10px;
+	margin-top: 5px;
+}
+div::-webkit-scrollbar {
+	display: none; 
+}

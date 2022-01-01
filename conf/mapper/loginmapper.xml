@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upc.gzq.dao.LoginMapper">
+	<select id="getAdminByAid" resultType="com.upc.gzq.entity.Admin">
+		select * from admin where aid=#{aid}
+	</select>
+	<select id="getAdminByUsername" resultType="com.upc.gzq.entity.Admin">
+		select * from admin where username=#{username}
+	</select>
+	
+	<select id="getAdminByUsernameAndPassword" resultType="com.upc.gzq.entity.Admin">
+		select * from admin where username=#{username} and password=#{password}
+	</select>
+	
+	<insert id="insertAdminByAid">
+		insert into admin values (#{aid},#{username},#{password},#{updateTime})
+	</insert>
+</mapper>

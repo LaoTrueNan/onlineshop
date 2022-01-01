@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upc.gzq.dao.BuyerMapper">
+	<insert id="insertBuyer">
+		insert into buyer values (#{bid},#{bname},#{bpassword},#{updateTime})
+	</insert>
+	<delete id="deleteBuyer">
+		delete from buyer where bid=#{bid}
+	</delete>
+	<update id="updateBuyer">
+		update buyer set bname=#{bname},bpassword=#{bpassword},update_time=#{updateTime} where bid=#{bid}
+	</update>
+	<select id="selectBuyerByBid" resultType="com.upc.gzq.entity.Buyer">
+		select * from buyer where bid=#{bid}
+	</select>
+	<select id="selectBuyerByBname" resultType="com.upc.gzq.entity.Buyer">
+		select * from buyer where bname=#{bname}
+	</select>
+	<select id="selectAllBuyer" resultType="com.upc.gzq.entity.Buyer">
+		select * from buyer
+	</select>
+</mapper>

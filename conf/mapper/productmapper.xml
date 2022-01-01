@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upc.gzq.dao.ProductMapper">
+	<select id="getProducts" resultType="com.upc.gzq.entity.Product">
+		select * from product limit #{index},#{size}
+	</select>
+	<select id="getTotalProductNo" resultType="java.lang.Integer">
+		select count(*) from product
+	</select>
+	<insert id="insertNewProduct">
+		insert into product values (#{pid},#{pname},#{pstock},#{pprice},#{ppicture},#{ptype},#{pstatus},#{updateTime})
+	</insert>
+	<update id="updateProduct">
+		update product set pname=#{pname},pstock=#{pstock},pprice=#{pprice},ptype=#{ptype},
+		ppicture=#{ppicture},pstatus=#{pstatus},update_time=#{updateTime}
+		where pid=#{pid}		 
+	</update>
+	<select id="selectProductByPid" resultType="com.upc.gzq.entity.Product">
+		select * from product where pid=#{pid}
+	</select>
+	<select id="selectProductByPtype" resultType="com.upc.gzq.entity.Product">
+		select * from product where ptype=#{ptype} and pstatus=1
+	</select>
+	<select id="getAllProducts" resultType="com.upc.gzq.entity.Product">
+		select * from product
+	</select>
+	
+	<select id="selectProductTypeByTcode" resultType="com.upc.gzq.entity.ProductType">
+		select * from product_type where tcode=#{tcode}
+	</select>
+	<select id="selectProductTypeList" resultType="com.upc.gzq.entity.ProductType">
+		select * from product_type limit #{index},#{size}
+	</select>
+	<insert id="insertNewProductType">
+		insert into product_type values(#{tid},#{tname},#{tcode},#{updateTime})
+	</insert>
+	<select id="getTotalTypeNum" resultType="java.lang.Integer">
+		select count(*) from product_type
+	</select>
+	<select id="selectAllTypes" resultType="com.upc.gzq.entity.ProductType">
+		select * from product_type
+	</select>
+	<select id="selectProductTypeByTname" resultType="com.upc.gzq.entity.ProductType">
+		select * from product_type where tname=#{tname}
+	</select>
+	<update id="updateProductType">
+		update product_type set tname=#{tname},tcode=#{tcode},update_time=#{updateTime} where tid=#{tid}
+	</update>
+</mapper>

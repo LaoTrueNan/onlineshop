@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,
+    width=device-width,initial-scale=1.0" />
+<title></title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/buyer_index.css">
+</head>
+
+<body>
+	<div class="header"></div>
+	<div class="main">
+		<div class="productlist maincontent" v-if="activepage=='productlist'">
+			<div class="sidebar">
+				<div class="typelist" v-for="item in type" v-bind:name="item.tcode"
+					@click="getproductbytype(item.tcode)">{{item.tname}}</div>
+			</div>
+			<div class="productinfolist">
+				<div class="productitem" v-for="(item,index) in products">
+					<img :src="item.ppicture" width="100px" height="100px">
+					<div class="textcontent">
+						<label>{{item.pname}}</label> <label>{{item.pprice}}元</label> <label>{{item.pstock}}件</label>
+					</div>
+					<div class="opbutton">
+						<button @click="sub(item.pid)" class="op">-</button>
+						<button :pid="item.pid" class="disabled" disabled="disabled">{{getNum(item.pid)}}</button>
+						<button @click="add(item.pid)" class="op">+</button>
+					</div>
+				</div>
+			</div>
+			<div class="sub">
+				<a @click="submit">创建订单</a>
+			</div>
+		</div>
+		<div class="orderitemlist maincontent" v-if="activepage=='orderitemlist'">
+			<div v-for="(item,index) in orderitem">
+				<span>{{index+1}} 商品名称： {{item.pname }} <br />购买数量：
+					{{item.pnum }}
+				</span>
+			</div>
+		</div>
+		<div class="orderlist maincontent" v-if="activepage=='orderlist'">
+			<div class="orderitem" v-for="(item,index) in order" v-if="Object.keys(buyer).length!=0&&signup===false">
+				<div class="ordercontent" @click="orderinfo(item.oid)">
+					<span>{{index+1}} {{dateFormat(item.updateTime)}}
+						{{item.status}}</span><img :src="item.productList[0].ppicture" alt=""
+						width="50px" height="50px">
+					<div class="orderinfo">
+						<span>{{item.productList[0].pname}}等{{item.pnum}}件商品
+							共{{item.amount}}元</span>
+					</div>
+				</div>
+			</div>
+			<h3 style="color:red;" v-if="JSON.stringify(buyer)=='{}'&&signup===false">请先登录</h3>
+		</div>
+		<div class="infopage maincontent" v-if="activepage=='infopage'">
+
+			<div class="infocontent" v-if="JSON.stringify(buyer)!='{}'&&signup===false">
+				<div class="infohead" v-text="'id '+buyer.bid"></div>
+				<div class="userinfo" v-text="'用户名 '+buyer.bname"></div>
+				<div class="quit">
+					<a @click="logout()">退出登录</a>
+				</div>
+			</div>
+			<div class="infocontent" v-if="JSON.stringify(buyer)=='{}'&&signup===false">
+				<h3>请登录</h3>
+				<div class="form-group">
+					<input class="buyerform" placeholder="用户名" type="text"
+						autocomplete="off" v-model="login.bname" />
+				</div>
+				<div class="form-group">
+					<input class="buyerform" placeholder="密码" type="password"
+						autocomplete="off" v-model="login.bpassword" />
+				</div>
+				<div class="form-group">
+					<div class="col">
+						<button type="button" @click="buyerlogin()"
+							class="btn btn-default">登录</button>
+						没有账号？<a @click="signup=!signup">去注册</a>
+					</div>
+				</div>
+			</div>
+			<div class="infocontent" v-if="signup===true">
+				<h3>请注册</h3>
+				<div class="form-group">
+					<input class="buyerform" placeholder="用户名" type="text"
+						autocomplete="off" v-model="signupinfo.bname" />
+				</div>
+				<div class="form-group">
+					<input class="buyerform" placeholder="密码" type="password"
+						autocomplete="off" v-model="signupinfo.bpassword" />
+				</div>
+				<div class="form-group">
+					<div class="col">
+						<button type="button" @click="buyersignup()"
+							class="btn btn-default">提交</button>
+						已有账号？<a @click="signup=!signup">登录</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="nav">
+		<div class="home footer"
+			:class="activepage()=='productlist'?'gray':'white'">
+			<img src="img/home.jpg" alt="s"
+				@click="changeactivepage('productlist')" height="50px">
+		</div>
+		<div class="list footer"
+			:class="activepage()=='orderlist'?'gray':'white'">
+			<img src="img/list.jpg" alt="s"
+				@click="changeactivepage('orderlist')" height="50px">
+		</div>
+		<div class="info footer"
+			:class="activepage()=='infopage'?'gray':'white'">
+			<img src="img/info.jpg" alt="s" @click="changeactivepage('infopage')"
+				height="50px">
+		</div>
+	</div>
+	<script>
+			var vue= new Vue({
+				el: "div.main",
+				data:{
+					activepage: "productlist",
+					type:[],
+					products:[],
+					cart:[],
+					signup: false,
+					order:[],
+					orderitem:[],
+					buyer:{},
+					login:{},
+					signupinfo:{}
+				},
+				methods:{
+					buyersignup(){
+						axios.post("buyer/regi",{signupinfo:this.signupinfo},{emulateJSON:true}).then(function(response){
+							alert(response.data);
+						})
+					},
+					gettypes:function(){
+						var that = this;
+						axios.get("product/buyergettypes").then(function(response){
+							that.type=response.data;
+						})
+					},
+					getProducts(){
+						var that = this;
+						axios.get("product/buyergetProducts").then(function(response){
+							that.cart = response.data;
+						})
+					},
+					getproductbytype:function(tcode){
+						var that = this;
+						axios.get("product/buyergetproductbytype?tcode="+tcode).then(function(response){
+							that.products = response.data;
+						})
+					},
+					add:function(pid){
+						for(var i=0;i<this.cart.length;i++){
+							if(this.cart[i].pid===pid){
+								this.cart[i].num++;
+							}
+						}
+						
+					},
+					orderinfo(oid){
+						var that = this;
+						axios.get("order/buyergetorderitembyoid?oid="+oid).then(function(response){
+							that.orderitem = response.data;
+							that.activepage = "orderitemlist";
+						})
+					},
+					sub:function(pid){
+						for(var i=0;i<this.cart.length;i++){
+							if(this.cart[i].pid===pid){
+								if(this.cart[i].num>0)
+									this.cart[i].num--;
+							}
+						}
+						
+					},
+					buyerlogin(){
+						var that = this;
+						axios.post("buyer/login",{buyer:this.login},{emulateJSON:true}).then(function(response){
+							if(response.data!=""){
+								that.getorder(response.data.bid);
+								that.buyer = response.data;
+							}else{
+								alert("用户名或密码错误");
+							}
+						})
+					},
+					getNum(pid){
+						for(var i=0;i<this.cart.length;i++){
+							if(this.cart[i].pid===pid){
+								return this.cart[i].num;
+							}
+						}
+					},
+					getorder(bid){
+						var that = this;
+						axios.get("order/getOrderByBid?bid="+bid).then(function(response){
+							that.order = response.data;
+						})
+					},
+					logout() {
+						this.buyer = {};
+						this.login.bpassword= "";
+					},
+					submit(){
+						var that = this;
+						axios.post("order/createOrder",{cart:this.cart,buyer:this.buyer.bid},{emulateJSON:true}).then(function(response){
+							if(response.data==="login"){
+								that.activepage="infopage";	
+							}else{
+								alert(response.data);
+								that.getProducts();
+								that.getproductbytype(0);
+							}
+						})
+					},
+					dateFormat(time) {
+		                var date=new Date(time);
+		                var year=date.getFullYear();
+		                /* 在日期格式中，月份是从0开始的，因此要加0
+		                 * 使用三元表达式在小于10的前面加0，以达到格式统一  如 09:11:05
+		                 * */
+		                var month= date.getMonth()+1<10 ? "0"+(date.getMonth()+1) : date.getMonth()+1;
+		                var day=date.getDate()<10 ? "0"+date.getDate() : date.getDate();
+		                var hours=date.getHours()<10 ? "0"+date.getHours() : date.getHours();
+		                var minutes=date.getMinutes()<10 ? "0"+date.getMinutes() : date.getMinutes();
+		                var seconds=date.getSeconds()<10 ? "0"+date.getSeconds() : date.getSeconds();
+		                // 拼接
+		                return year+"-"+month+"-"+day+" "+hours+":"+minutes+":"+seconds;
+		            }
+					
+				},
+				mounted:function(){
+					this.gettypes();
+					this.getProducts();
+					this.getproductbytype(0);
+				}
+			
+			});
+			var nav = new Vue({
+				el:"div.nav",
+				methods:{
+					changeactivepage:function(e){
+						if(e==="orderlist"&&Object.keys(vue.buyer).length!=0){
+							vue.getorder(vue.buyer.bid);
+						}else if(e==="productlist"){
+							vue.getProducts();
+							vue.gettypes();
+						}
+						vue.activepage = e; 
+					},
+					activepage(){
+						return vue.activepage;
+					}
+				}
+			});
+			
+		</script>
+</body>
+</html>

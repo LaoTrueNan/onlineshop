@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.upc.gzq.dao.OrderMapper">
+
+<!-- 	public int insertOrder(OrderMaster orderMaster); -->
+		<insert id="insertOrder">
+			insert into order_master values (#{oid},#{amount},#{bid},#{status},#{updateTime})
+		</insert>
+<!-- 	public int deleteOrder(OrderMaster orderMaster); -->
+<delete id="deleteOrder">
+	delete from order_item where oid=#{oid};
+	delete from order_master where oid=#{oid};
+</delete>
+<update id="updateOrder">
+	update order_master set status=#{status} where oid=#{oid}
+</update>
+
+<!-- 	public OrderMaster selectOrderMasterByOid(@Param("oid")String oid); -->
+	<select id="selectOrderMasterByOid" resultType="com.upc.gzq.entity.OrderMaster">
+		select * from order_master where oid=#{oid}
+	</select>
+<!-- 	public OrderMaster selectOrderMasterByBid(@Param("bid")String bid); -->
+<select id="selectOrderMasterByBid" resultType="com.upc.gzq.entity.OrderMaster">
+	select * from order_master where bid=#{bid}
+</select>
+<!-- 	public List<OrderMaster> selectOrderMasterList(); -->
+	<select id="selectAllOrderMaster" resultType="com.upc.gzq.entity.OrderMaster">
+	select * from order_master
+</select>
+	<select id="selectOrderMasterList" resultType="com.upc.gzq.entity.OrderMaster">
+		select * from order_master limit #{index},#{size}
+	</select>
+	<select id="selectTotalOrderMasterNum" resultType="java.lang.Integer">
+		select count(*) from order_master
+	</select>
+<!-- 	public int insertOrderItem(OrderItem orderItem); -->
+<insert id="insertOrderItem">
+			insert into order_item values (#{iid},#{oid},#{pid},#{pname},#{pnum},#{updateTime})
+		</insert>
+<!-- 	public int deleteOrderItem(OrderItem orderItem); -->
+<!-- 	public int updateOrderItem(OrderItem orderItem); -->
+<update id="updateOrderItem">
+	update order_item set pname=#{pname} where iid=#{iid}
+</update>
+<!-- 	public List<OrderItem> selectOrderItemByOid(@Param("oid")String oid); -->
+<select id="selectOrderItemByOid" resultType="com.upc.gzq.entity.OrderItem">
+		select * from order_item where oid=#{oid}
+	</select>
+	<select id="selectOrderItemByPid" resultType="com.upc.gzq.entity.OrderItem">
+		select * from order_item where pid=#{pid}
+	</select>
+</mapper>

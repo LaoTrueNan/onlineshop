@@ -1,0 +1,286 @@
+*{
+	margin: 0;
+	padding: 0;
+	
+}
+
+body,html{
+	margin: 0 auto;
+	width: 375px;
+	height: 670px;
+	font-family: "Microsoft YaHei UI";
+	
+}
+html{
+	padding-top: 0.6rem;
+}
+body{
+	border: 1px solid gray;
+}
+.main{
+	padding-top: 0.5rem;
+	color: white;
+	background-color: #DDEBFF;
+	width: 100%;
+	height: 70%;
+	font-size: 2rem;
+}
+.header{
+	border-radius: 0.3125rem;
+	width: 100%;
+	height: 20%;
+	background-image: url(../img/upcupc.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-size: 100% 100%;
+}
+.nav{
+	border-top: 0.1rem solid gray;
+	background-color: white;
+	height: 8%;
+}
+
+.footer{
+	float: left;
+	width: 33%;
+	text-align: center;
+}
+.footer img{
+	border-radius:10px;
+	cursor: pointer;
+}
+.maincontent{
+	width: 100%;
+	height: 100%;
+}
+
+.productlist .sidebar{
+	background-color: #DDEBFF;
+	width: 20%;
+	float: left;
+	overflow: scroll;
+	height: 100%;
+}
+.sidebar .typelist{
+	border-radius: 0.5rem;
+	border-bottom: 1px solid bisque;
+	width: 100%;
+	height: 2.5rem;
+	color: white;
+	font-size: 1rem;
+	font-family: "Microsoft YaHei UI";
+	font-weight: bold;
+	text-align: center;
+	cursor: pointer;
+}
+
+.typelist:nth-child(4n+0){
+	background-color: #FFA011;
+}
+
+.typelist:nth-child(4n+1){
+	background-color: #19c7aa;
+}
+.typelist:nth-child(4n+2){
+	background-color: #e33b3e;
+}
+.typelist:nth-child(4n+3){
+	background-color: #535cfd;
+}
+.productlist .productitem{
+	width: 100%;
+	border-bottom: 1px dotted #F7F7F7;
+	float: left;
+}
+.productitem:nth-child(odd){
+	background-color: white;
+}
+.productitem:nth-child(even){
+	background-color: #F7F7F7;
+}
+.textcontent label{
+	width: 70px;
+	font-size: 1rem;
+}
+.textcontent{
+	float: left;
+}
+.productitem img{
+	float: right;
+	margin-bottom: 3px;
+	border-radius: 10px;
+}
+.productinfolist{
+	color:  black;
+	height: 93%;
+	overflow: scroll;
+	border-left: 0.1rem solid gray;
+}
+.opbutton{
+	float: left;
+	margin-left: 1rem;
+}
+.opbutton span{
+	color: red;
+}
+.opbutton .op{
+	width: 2rem;
+	height: 2rem;
+	border: 1px solid transparent;
+	outline: none;
+}
+button.disabled{
+	width: 2rem;
+	height: 2rem;
+	background-color: #55aaff;
+	color: red;
+	border: 1px solid transparent;
+	color: black;
+}
+div::-webkit-scrollbar {
+	display: none; 
+}
+
+.sub{
+	background-color: #03629a;
+	height: 7%;
+	width: 80%;
+	float: right;
+	text-align: center;
+	border-radius: 0.5rem;
+}
+.sub a{
+	color: white;
+	text-decoration: none;
+	font-size: 1.3rem;
+	cursor: pointer;
+}
+.sub a:hover{
+	font-size: bold;
+	color: red;
+}
+.orderitem{
+	border: 1px dotted gray;
+	margin-bottom: 4px;
+	cursor: pointer;
+}
+.orderitem:nth-child(odd){
+	background-color: white;
+	color: black;
+}
+.orderitem:nth-child(even){
+	background-color: #D5D5D5;
+	color: black;
+}
+.ordercontent span{
+	font-size: 1rem;
+}
+.orderlist{
+	overflow: scroll;
+}
+.orderinfo span{
+	
+	font-size: 0.7rem;
+}
+
+.ordercontent label{
+	width: 70px;
+	margin-right: 0.5rem;
+	font-size: 0.6rem;
+}
+.ordercontent img{
+	float: right;
+}
+
+.orderitemlist{
+		color: black;
+		overflow: scroll;
+}
+.orderitemlist span{
+	display: block;
+	border: 1px solid aqua;
+	border-radius: 10px;
+	margin-top: 5px;
+	font-size: 1rem;
+}
+.gray{
+	background-color: #e8e8e8;
+}
+.white{
+	background-color: white;
+}
+.infocontent{
+	margin-top: 3rem;
+	height: 100%;
+	text-align: center;
+	color: black;
+}
+.infohead{
+	color: black;
+	height: 20%;
+	background-color: #DDEBFF;
+	border: 2px dotted pink;
+}
+.userinfo{
+	height: 40%;
+	background-color: #DDEBFF;
+	border: 2px dotted pink;
+}
+.quit{
+	height: 10%;
+	text-align: center;
+	background-color: #86da47;
+}
+.quit a{
+	cursor: pointer;
+}
+.quit a:active{
+	color: #54882c;
+}
+.buyerform{
+	display: block;
+	width: 100%;
+	border: 1px solid black;
+	border-radius: 4px;
+	margin-top: 0.7rem;
+	height: 2rem;
+	padding: 0.3rem 0.5rem;
+	outline:  #DDEBFF;
+	border: 1px solid transparent;
+}
+.form-group{
+	display: table;
+	margin-left: -1rem;
+	margin-right: -1rem;
+	margin: 0 auto;
+}
+.btn,
+.btn:focus{
+	width: 60px;
+	height: 35px;
+	font-family: "microsoft yahei";
+	border: 1px solid transparent;
+	border-radius: 5px;
+	background: #86da47;
+	white-space: nowrap;
+	cursor: pointer;
+	outline: none;
+}
+
+.btn:hover
+{
+	outline: none;
+	background-color: #017e05;
+	color: white;
+}
+.col{
+	font-size: 1rem;
+	margin-top: 0.6rem;
+}
+.col a{
+	color: red;
+	cursor: pointer;
+}
+.col a:hover{
+	color: orange;
+}
